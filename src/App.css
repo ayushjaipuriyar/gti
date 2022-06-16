@@ -38,14 +38,25 @@
 }
 
 .descimg {
-	background: url('https://gailebank.gail.co.in/gti/images/gti-noida-big.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center center;
 	min-height: 486px;
 	min-width: 100%;
 }
-
+.descg {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	min-height: 486px;
+	min-width: 100%;
+}
+.centerimg {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	max-width: 240px;
+}
 .fap {
 	padding: 30px;
 }

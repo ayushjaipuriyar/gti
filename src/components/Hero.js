@@ -6,6 +6,7 @@ import {
 	Card,
 	Box,
 	Avatar,
+	CardMedia,
 } from '@mui/material';
 import CenterFocusStrongIcon from '@mui/icons-material/CenterFocusStrong';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
@@ -13,18 +14,13 @@ import DeveloperBoardIcon from '@mui/icons-material/DeveloperBoard';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import React from 'react';
 import CentersCard from './Centers';
-import Gallery from '../pages/Gallery';
+// import Gallery from '../pages/Gallery';
 
 const Desc = () => {
 	const centers = ['Noida', 'Jaipur'];
 	return (
 		<>
-			<Grid
-				container
-				justifyContent='center'
-				alignItems='stretch'
-				sx={{ marginTop: '10vh' }}
-			>
+			<Grid container justifyContent='center' alignItems='stretch'>
 				<Grid
 					item
 					xs={0}
@@ -70,7 +66,13 @@ const Desc = () => {
 						<Grid item xs={0} sm={1}></Grid>
 						<Grid item xs={12} sm={6}>
 							<Paper elevation={6}>
-								<div className='descimg'></div>
+								<div className='descimg'>
+									<CardMedia
+										component='img'
+										image='https://gailebank.gail.co.in/gti/images/gti-noida-big.jpg'
+										className='descg'
+									/>
+								</div>
 							</Paper>
 						</Grid>
 					</Grid>
@@ -88,30 +90,6 @@ const Desc = () => {
 								<CentersCard center={centers} />
 							</Grid>
 						))}
-						;
-						{/* <Grid item>
-								<Card sx={{ maxWidth: 345 }}>
-									<CardMedia
-										component='img'
-										height='200'
-										image='https://gailebank.gail.co.in/gti/images/gti-jaipur-big.jpg'
-										alt='GTI Jaipur'
-									/>
-									<CardContent>
-										<Typography gutterBottom variant='h5' component='div'>
-											Jaipur
-										</Typography>
-										<Typography variant='body2' color='text.secondary'>
-											Gail Training Institute at 
-										</Typography>
-									</CardContent>
-									<CardActions>
-										<Button size='small' color='primary'>
-											Learn More
-										</Button>
-									</CardActions>
-								</Card>
-							</Grid> */}
 					</Grid>
 					<br></br>
 					<hr></hr>
@@ -193,7 +171,13 @@ const Desc = () => {
 						<Grid item xs={0} sm={1}></Grid>
 						<Grid item xs={12} sm={6}>
 							<Paper elevation={6}>
-								<div className='descimg'></div>
+								<div className='descimg'>
+									<CardMedia
+										component='img'
+										image='https://gailebank.gail.co.in/gti/images/22-02-10-2.jpg'
+										className='descg'
+									/>
+								</div>
 							</Paper>
 						</Grid>
 					</Grid>
@@ -208,7 +192,13 @@ const Desc = () => {
 					<Grid container spacing={2} padding={2} justifyContent='center'>
 						<Grid item xs={12} sm={6}>
 							<Paper elevation={6}>
-								<div className='descimg'></div>
+								<div className='descimg'>
+									<CardMedia
+										component='img'
+										image='https://gailebank.gail.co.in/gti/images/gti-noida-big.jpg'
+										className='descg'
+									/>
+								</div>
 							</Paper>
 						</Grid>
 						<Grid item xs={0} sm={1}></Grid>
