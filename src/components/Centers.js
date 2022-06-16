@@ -7,6 +7,7 @@ import {
 	CardActions,
 	Typography,
 } from '@mui/material';
+import Noida from './center/Noida';
 import { Link } from 'react-router-dom';
 
 const CentersCard = (props) => {
@@ -31,6 +32,7 @@ const CentersCard = (props) => {
 					<Link
 						style={{ color: 'inherit', textDecoration: 'none' }}
 						to={`/center/${props.center}`}
+						component={props.center}
 					>
 						Learn More
 					</Link>
