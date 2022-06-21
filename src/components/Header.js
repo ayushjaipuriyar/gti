@@ -12,13 +12,12 @@ import { Link } from 'react-router-dom';
 import AddBusinessRoundedIcon from '@mui/icons-material/AddBusinessRounded';
 import DrawerComp from './Drawer';
 const Header = () => {
-	const pages = ['Products', 'Services', 'AboutUs', 'ContactUs'];
-	const [value, setValue] = useState();
+	const pages = ['Home', 'Services', 'AboutUs', 'ContactUs'];
+	const [value, setValue] = useState(0);
 	const theme = useTheme();
 	console.log(theme);
 	const isMatch = useMediaQuery(theme.breakpoints.down('md'));
 	console.log(isMatch);
-
 	return (
 		<React.Fragment>
 			<AppBar sx={{ background: '#063970' }}>
@@ -44,8 +43,9 @@ const Header = () => {
 									<Link
 										style={{ color: 'inherit', textDecoration: 'none' }}
 										to={`/${pages}`}
+										key={index}
 									>
-										<Tab label={pages} />
+										<Tab label={pages} key={index}></Tab>
 									</Link>
 								))}
 							</Tabs>

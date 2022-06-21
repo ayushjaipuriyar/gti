@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
-const pages = ['Products', 'Services', 'AboutUs', 'ContactUs'];
+const pages = ['Home', 'Services', 'AboutUs', 'ContactUs'];
 const DrawerComp = () => {
 	const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -25,6 +25,7 @@ const DrawerComp = () => {
 						<Link
 							style={{ color: 'inherit', textDecoration: 'none' }}
 							to={`/${page}`}
+							key={index}n
 						>
 							<ListItemButton key={index}>
 								<ListItemIcon>
