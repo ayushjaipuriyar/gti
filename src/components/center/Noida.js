@@ -32,7 +32,7 @@ const Noida = () => {
 							gapRow: 10,
 						}}
 					>
-						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
+						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
 								image='https://gailebank.gail.co.in/gti/images/room1.jpg'
@@ -50,7 +50,7 @@ const Noida = () => {
 								</Typography>
 							</CardContent>
 						</Card>
-						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
+						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
 								image='https://gailebank.gail.co.in/gti/images/computer-lab.jpg'
@@ -65,7 +65,7 @@ const Noida = () => {
 								</Typography>
 							</CardContent>
 						</Card>
-						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
+						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
 								image='https://gailebank.gail.co.in/gti/images/library.jpg'
@@ -85,7 +85,7 @@ const Noida = () => {
 								</Typography>
 							</CardContent>
 						</Card>
-						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
+						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
 								image='https://gailebank.gail.co.in/gti/images/gim.jpg'
@@ -102,7 +102,7 @@ const Noida = () => {
 								</Typography>
 							</CardContent>
 						</Card>
-						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
+						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
 								image='https://gailebank.gail.co.in/gti/images/conferenceroom.jpg'
@@ -118,7 +118,7 @@ const Noida = () => {
 								</Typography>
 							</CardContent>
 						</Card>
-						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
+						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
 								image='https://gailebank.gail.co.in/gti/images/auditorium-room.jpg'
@@ -133,7 +133,7 @@ const Noida = () => {
 								</Typography>
 							</CardContent>
 						</Card>
-						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
+						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
 								image='https://gailebank.gail.co.in/gti/images/accommodation.jpg'
@@ -150,7 +150,7 @@ const Noida = () => {
 								</Typography>
 							</CardContent>
 						</Card>
-						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
+						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
 								image='https://gailebank.gail.co.in/gti/images/cafeteria.jpg'

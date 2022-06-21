@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
 	AppBar,
 	Tab,
@@ -7,20 +7,13 @@ import {
 	Typography,
 	useMediaQuery,
 	useTheme,
-	Paper,
-	Button,
-	Popper,
-	MenuList,
-	Grow,
-	MenuItem,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
 import AddBusinessRoundedIcon from '@mui/icons-material/AddBusinessRounded';
 import DrawerComp from './Drawer';
 const Header = () => {
-	const pages = ['Products', 'Services', 'AboutUs', 'ContactUs'];
-	const [value, setValue] = useState();
+	const pages = ['Home', 'Services', 'AboutUs', 'ContactUs'];
+	const [value, setValue] = useState(0);
 	const theme = useTheme();
 	console.log(theme);
 	const isMatch = useMediaQuery(theme.breakpoints.down('md'));
@@ -50,8 +43,9 @@ const Header = () => {
 									<Link
 										style={{ color: 'inherit', textDecoration: 'none' }}
 										to={`/${pages}`}
+										key={index}
 									>
-										<Tab label={pages}></Tab>
+										<Tab label={pages} key={index}></Tab>
 									</Link>
 								))}
 							</Tabs>
