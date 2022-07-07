@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ThemeProvider } from '@emotion/react';
-import { theme } from './theme';
-
+import { CookiesProvider } from 'react-cookie';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		{/* <ThemeProvider theme={theme}> */}
-		<App />
-		{/* </ThemeProvider>  */}
+		<CookiesProvider>
+			{/* <ThemeProvider theme={theme}> */}
+			<App />
+			{/* </ThemeProvider>  */}
+		</CookiesProvider>
 	</React.StrictMode>,
 );
 
