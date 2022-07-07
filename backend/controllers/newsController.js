@@ -20,7 +20,7 @@ const upload = multer({
   fileFilter: multerFilter,
 });
 
-exports.uploadTourImages = upload.fields([
+exports.uploadNewsImages = upload.fields([
   { name: "imageCover", maxCount: 1 },
   { name: "images", maxCount: 3 },
 ]);
