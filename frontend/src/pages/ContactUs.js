@@ -4,13 +4,93 @@ import {
 	Grid,
 	Typography,
 	Paper,
-	FormControl,
 	TextareaAutosize,
+	Button,
 } from '@mui/material';
-import { color } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
 
 const ContactUs = () => {
+	const [values, setValues] = useState({
+		name: '',
+		designation: '',
+		organization: '',
+		phoneno: '',
+		email: '',
+		query: '',
+	});
+	const [errors, setErrors] = useState({
+		name: '',
+		designation: '',
+		organization: '',
+		phoneno: '',
+		email: '',
+		query: '',
+	});
+	const handleInputChange = (e) => {
+		setValues({
+			...values,
+			[e.target.name]: e.target.value,
+		});
+	};
+	const submitHandler = async (event) => {
+		event.preventDefault();
+		setErrors({
+			name: '',
+			designation: '',
+			organization: '',
+			phoneno: '',
+			email: '',
+			query: '',
+		});
+		try {
+			const response = await fetch('http://localhost:5000/api/v1/query/', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json; charset=utf-8',
+					// 'X-]Content-Type-Options': 'nosniff',
+				},
+				body: JSON.stringify({
+					name: values.name,
+					designation: values.designation,
+					organization: values.organization,
+					phoneno: values.phoneno,
+					email: values.email,
+					query: values.query,
+				}),
+			});
+
+			const responseData = await response.json();
+			console.log(responseData);
+			console.log(responseData.error.errors.name.message);
+			setErrors({
+				name: responseData.error.errors.name.message,
+				designation: responseData.error.errors.designation.message,
+				organization: responseData.error.errors.organization.message,
+				phoneno: responseData.error.errors.phoneno.message,
+				email: responseData.error.errors.email.message,
+				query: responseData.error.errors.query.message,
+			});
+			if (!response.ok) {
+				setErrors({
+					name: responseData.error.errors.name.message,
+					designation: responseData.error.errors.designation.message,
+					organization: responseData.error.errors.organization.message,
+					phoneno: responseData.error.errors.phoneno.message,
+					email: responseData.error.errors.email.message,
+					query: responseData.error.errors.query.message,
+				});
+				throw new Error(
+					responseData.error.status + ' ' + responseData.error.statusCode,
+				);
+			}
+
+			// console.log(errors);
+		} catch (err) {
+			console.log(errors);
+			console.log(err);
+			// console.log(responseData);
+		}
+	};
 	return (
 		<>
 			<Grid container justifyContent='center' alignItems='stretch'>
@@ -30,7 +110,6 @@ const ContactUs = () => {
 						<Grid item xs={12} sm={10}>
 							<Box
 								sx={{
-									p: 2,
 									bgcolor: 'background.default',
 									display: 'grid',
 									gridTemplateColumns: { md: '1fr 1fr' },
@@ -38,7 +117,7 @@ const ContactUs = () => {
 									gapRow: 10,
 								}}
 							>
-								<Paper sx={{ padding: 5 }}>
+								<Paper sx={{ padding: 3 }}>
 									<p>
 										<Typography variant='h5' component='h2'>
 											GAIL Training Institute Noida
@@ -56,7 +135,7 @@ const ContactUs = () => {
 										<a
 											href='tel:01202515353'
 											onclick="ga('send', 'event', { eventCategory: 'Contact', eventAction: 'Call', eventLabel: 'Mobile Button'});"
-											style={{ textDecoration: 'none', color: 'inherit' }}
+											style={{ color: 'inherit' }}
 										>
 											0120-2515353
 										</a>
@@ -64,7 +143,7 @@ const ContactUs = () => {
 										<a
 											href='tel:01202515354'
 											onclick="ga('send', 'event', { eventCategory: 'Contact', eventAction: 'Call', eventLabel: 'Mobile Button'});"
-											style={{ textDecoration: 'none', color: 'inherit' }}
+											style={{ color: 'inherit' }}
 										>
 											354
 										</a>
@@ -72,7 +151,7 @@ const ContactUs = () => {
 										<a
 											href='tel:01202515355'
 											onclick="ga('send', 'event', { eventCategory: 'Contact', eventAction: 'Call', eventLabel: 'Mobile Button'});"
-											style={{ textDecoration: 'none', color: 'inherit' }}
+											style={{ color: 'inherit' }}
 										>
 											355
 										</a>{' '}
@@ -80,16 +159,13 @@ const ContactUs = () => {
 										<a
 											href='tel:01202515363'
 											onclick="ga('send', 'event', { eventCategory: 'Contact', eventAction: 'Call', eventLabel: 'Mobile Button'});"
-											style={{ textDecoration: 'none', color: 'inherit' }}
+											style={{ color: 'inherit' }}
 										>
 											363
 										</a>
 										<br></br>
 										Fax No.
-										<a
-											href='fax:01202511134'
-											style={{ textDecoration: 'none', color: 'inherit' }}
-										>
+										<a href='fax:01202511134' style={{ color: 'inherit' }}>
 											0120-2511134
 										</a>
 										<br></br>
@@ -104,7 +180,7 @@ const ContactUs = () => {
 										Website: www.gailonline.com
 									</p>
 								</Paper>
-								<Paper sx={{ padding: 5 }}>
+								<Paper sx={{ padding: 3 }}>
 									<p>
 										<Typography variant='h5' component='h2'>
 											GAIL Training Institute Jaipur
@@ -122,7 +198,7 @@ const ContactUs = () => {
 										<a
 											href='tel:01412230347'
 											onclick="ga('send', 'event', { eventCategory: 'Contact', eventAction: 'Call', eventLabel: 'Mobile Button'});"
-											style={{ textDecoration: 'none', color: 'inherit' }}
+											style={{ color: 'inherit' }}
 										>
 											0141-2230347
 										</a>{' '}
@@ -130,16 +206,13 @@ const ContactUs = () => {
 										<a
 											href='tel:01412230698'
 											onclick="ga('send', 'event', { eventCategory: 'Contact', eventAction: 'Call', eventLabel: 'Mobile Button'});"
-											style={{ textDecoration: 'none', color: 'inherit' }}
+											style={{ color: 'inherit' }}
 										>
 											698
 										</a>
 										<br></br>
 										Fax No.
-										<a
-											href='fax:01412230374'
-											style={{ textDecoration: 'none', color: 'inherit' }}
-										>
+										<a href='fax:01412230374' style={{ color: 'inherit' }}>
 											0141-2230374
 										</a>
 										<br></br>
@@ -154,55 +227,101 @@ const ContactUs = () => {
 								</Paper>
 							</Box>
 						</Grid>
-						<Box sx={{ marginLeft: 2 ,marginTop:5}}>
-							<Paper sx={{ padding: 5 }}>
+						<Box sx={{ marginLeft: 2, marginTop: 5 }}>
+							<Paper sx={{ padding: 3 }}>
 								<Typography variant='h5' component='h2'>
 									Query Submition
 								</Typography>
 								<Box
 									component='form'
 									sx={{
-										'& .MuiTextField-root': { m: 1, width: '25ch' },
+										p: 2,
+										bgcolor: 'background.default',
+										display: 'grid',
+										gridTemplateColumns: { md: '1fr 1fr' },
+										gap: 4,
+										gapRow: 10,
 									}}
 									noValidate
 									autoComplete='off'
 								>
-									<FormControl>
-										<TextField
-											id='outlined-basic'
-											label='Name'
-											variant='outlined'
-										/>
-										<TextField
-											id='outlined-basic'
-											label='Designation'
-											variant='outlined'
-										/>
-										<TextField
-											id='outlined-basic'
-											label='Organizatoin'
-											variant='outlined'
-										/>
-										<TextField
-											id='outlined-basic'
-											label='Phone No'
-											variant='outlined'
-											inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-										/>
+									<TextField
+										id='outlined-basic'
+										label='Name'
+										name='name'
+										onChange={handleInputChange}
+										value={values.name}
+										variant='outlined'
+										error={errors.name === '' ? false : true}
+										helperText={errors.name}
+									/>
+									<TextField
+										id='outlined-basic'
+										label='Designation'
+										name='designation'
+										onChange={handleInputChange}
+										value={values.designation}
+										variant='outlined'
+										error={errors.designation === '' ? false : true}
+										helperText={errors.designation}
+									/>
+									<TextField
+										id='outlined-basic'
+										label='Organization'
+										name='organization'
+										onChange={handleInputChange}
+										value={values.organization}
+										variant='outlined'
+										error={errors.organization === '' ? false : true}
+										helperText={errors.organization}
+									/>
+									<TextField
+										id='outlined-basic'
+										label='Phone No'
+										name='phoneno'
+										onChange={handleInputChange}
+										value={values.phoneno}
+										variant='outlined'
+										inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+										error={errors.phoneno === '' ? false : true}
+										helperText={errors.phoneno}
+									/>
 
-										<TextField
-											id='outlined-basic'
-											label='E-mail'
-											variant='outlined'
-										/>
+									<TextField
+										id='outlined-basic'
+										label='E-mail'
+										name='email'
+										onChange={handleInputChange}
+										value={values.email}
+										variant='outlined'
+										error={errors.email === '' ? false : true}
+										helperText={errors.email}
+									/>
+									<div>
 										<TextareaAutosize
 											aria-label='minimum height'
-											minRows={3}
+											minRows={2}
 											placeholder='Query'
-											style={{ width: 240, marginLeft: 8, marginTop: 8 }}
+											name='query'
+											onChange={handleInputChange}
+											value={values.query}
+											style={{ height: '5vh', width: '97%' }}
 										/>
-									</FormControl>
+										<p
+											class='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-1wc848c-MuiFormHelperText-root'
+											id='outlined-basic-helper-text'
+										>
+											{errors.query}
+										</p>
+									</div>
 								</Box>
+								<Button
+									variant='outlined'
+									onClick={submitHandler}
+									style={{ marginLeft: '20vw' }}
+								>
+									Submit
+								</Button>
 							</Paper>
 						</Box>
 					</Grid>
