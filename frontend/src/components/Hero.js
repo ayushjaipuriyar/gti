@@ -86,8 +86,8 @@ const Desc = () => {
 					<br></br>
 					<Grid container spacing={2} padding={2} justifyContent='center'>
 						{centers.map((centers, index) => (
-							<Grid item>
-								<CentersCard center={centers} />
+							<Grid item key={index}>
+								<CentersCard center={centers} key={index} />
 							</Grid>
 						))}
 					</Grid>
