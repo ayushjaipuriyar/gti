@@ -21,10 +21,12 @@ const QueriesLoader = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (!sessionStorage.getItem('jwt')) {
+		if (
+			!sessionStorage.getItem('jwt') ||
+			sessionStorage.getItem('jwt') === 'loggedout'
+		) {
 			navigate('/auth/login');
-			console.log('NOt auhtenticated');
-			console.log(sessionStorage.getItem('jwt'));
+			console.log('Not authenticated');
 		}
 	}, [navigate]);
 	const [data, setData] = useState([]);
@@ -68,6 +70,7 @@ const QueriesLoader = () => {
 		},
 	});
 	const headCells = [
+		{ id: '', label: '' },
 		{ id: 'name', label: 'Name' },
 		{ id: 'email', label: 'Email Address' },
 		{ id: 'phoneno', label: 'Mobile Number' },
@@ -87,33 +90,46 @@ const QueriesLoader = () => {
 				if (target.value === '') return datas;
 				else
 					return datas.filter((x) =>
-						x.fullName.toLowerCase().includes(target.value),
+						x.name.toLowerCase().includes(target.value),
 					);
 			},
 		});
 	};
 
 	const deleteHandler = async (id) => {
-		// console.log(id);
-		alert('Do you really want to delete this query ?');
-		try {
-			const response = await fetch(`http://localhost:5000/api/v1/query/${id}`, {
-				method: 'DELETE',
-				credentials: 'include',
-				headers: {
-					'Content-Type': 'application/json; charset=utf-8',
-					Authorization: ('Bearer ', sessionStorage.getItem('jwt')),
+		const res = prompt('Do you really want to delete this news ?');
+		if (res === null || res === '') {
+		} else if (res === 'yes') {
+			try {
+				const response = await fetch(
+					`http://localhost:5000/api/v1/query/${id}`,
+					{
+						method: 'DELETE',
+						credentials: 'include',
+						headers: {
+							'Content-Type': 'application/json; charset=utf-8',
+							Authorization: ('Bearer ', sessionStorage.getItem('jwt')),
 
-					// 'X-]Content-Type-Options': 'nosniff',
-				},
-			});
-			if (!response.ok) {
-				const responseData = await response.json();
-				throw new Error(responseData.message);
+							// 'X-]Content-Type-Options': 'nosniff',
+						},
+					},
+				);
+				console.log(response);
+				if (response.ok) {
+					data.splice(
+						data.findIndex((x) => x.id === id),
+						1,
+					);
+					navigate('/auth/queries');
+				}
+				if (!response.ok) {
+					const responseData = await response.json();
+					throw new Error(responseData.message);
+				}
+			} catch (error) {
+				console.log(error);
+				alert(error);
 			}
-		} catch (error) {
-			console.log(error);
-			alert(error);
 		}
 	};
 	return (
@@ -137,7 +153,7 @@ const QueriesLoader = () => {
 							{/* <EmployeeForm /> */}
 							<Toolbar>
 								<Input
-									label='Search Employees'
+									label='Search Names'
 									InputProps={{
 										startAdornment: (
 											<InputAdornment position='start'>
@@ -153,6 +169,7 @@ const QueriesLoader = () => {
 								<TableBody>
 									{recordsAfterPagingAndSorting().map((data) => (
 										<TableRow key={data.id}>
+											<TableCell></TableCell>
 											<TableCell>{data.name}</TableCell>
 											<TableCell>{data.email}</TableCell>
 											<TableCell>{data.phoneno}</TableCell>
