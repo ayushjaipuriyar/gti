@@ -3,13 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 const Logout = () => {
 	const navigate = useNavigate();
-useEffect(() => {
-	if (!sessionStorage.getItem('jwt')) {
-		navigate('/auth/login');
-		console.log('NOt auhtenticated');
-		console.log(sessionStorage.getItem('jwt'));
-	}
-}, [navigate]);
+	useEffect(() => {
+		if (!sessionStorage.getItem('jwt')) {
+			navigate('/auth/login');
+			console.log('Not authenticated');
+		}
+	}, [navigate]);
 	const fun = async () => {
 		try {
 			const response = await fetch(
@@ -46,7 +45,7 @@ useEffect(() => {
 	};
 	useEffect(() => {
 		fun();
-	}, []);
+	} );
 
 	return (
 		<>

@@ -16,7 +16,7 @@ const CentersCard = (props) => {
 			<CardMedia
 				component='img'
 				height='200'
-				image={`https://gailebank.gail.co.in/gti/images/gti-${props.center}-big.jpg`}
+				image={`/img/centers/${props.center}/gti-${props.center}-big.jpg`}
 				alt={`GTI ${props.center}`}
 			/>
 			<CardContent>

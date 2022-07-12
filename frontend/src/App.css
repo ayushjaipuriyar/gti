@@ -60,3 +60,8 @@
 .fap {
 	padding: 30px;
 }
+.galleryimageerror {
+	position: absolute;
+	left: 100px;
+	top: 100px;
+}

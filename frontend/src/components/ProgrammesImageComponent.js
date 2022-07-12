@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { TableCell } from '@mui/material';
+import React, { useEffect } from 'react';
+import '../pages/gallery.css';
 
 const ImageComponent = (props) => {
-	const [isLoading, setIsLoading] = useState(false);
 	useEffect(() => {
-		setIsLoading(true);
 		const fetchImage = async (url) => {
 			try {
 				const response = await fetch(`http://localhost:5000/img/news/${url}`, {
@@ -15,37 +15,21 @@ const ImageComponent = (props) => {
 					},
 				});
 				const blob = await response.blob();
-				// console.log(blob);
-				// console.log(URL.createObjectURL(blob));
 				const image = new Image();
 				image.src = URL.createObjectURL(blob);
 				image.style.width = '100px';
 				image.style.heigh = '100px';
-				// console.log(image);
-				// return image;
-				document.getElementById(`img ${props.id}`).appendChild(image);
-				// const src = URL.createObjectURL(blob);
-				// return <>image</>;
+				image.style.marginRight = '0px';
+				image.className = 'item';
+				document.getElementById(`img-${props.id}`).appendChild(image);
 			} catch (error) {
 				console.error(`get: error occurred ${error}`);
 				return [null, error];
 			}
-			setIsLoading(false);
 		};
 		fetchImage(props.url);
 	}, [props.id, props.url]);
-	return (
-		<>
-			{isLoading && (
-				<img
-					src='https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'
-					alt='spinner'
-				/>
-			)}
-			<p id={`img ${props.id}`}></p>
-			{/* {fetchImage($props.id)} */}
-		</>
-	);
+	return <TableCell id={`img-${props.id}`}></TableCell>;
 };
 
 export default ImageComponent;

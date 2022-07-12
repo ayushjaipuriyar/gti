@@ -1,10 +1,11 @@
 import { Grid, Paper, TextField, Button, Box } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
 const Admin = () => {
-	const [cookies, setCookie, removeCookie] = useCookies(['jwt']);
+	useEffect(() => {
+		sessionStorage.setItem('jwt', 'loggedout');
+	}, []);
 	const navigate = useNavigate();
 	const [values, setValues] = useState({
 		email: 'admin1@gmail.com',
@@ -44,15 +45,10 @@ const Admin = () => {
 				},
 			);
 			const responseData = await response.json();
-			// console.log(responseData.token);
 			console.log(responseData);
 			let token = JSON.stringify(responseData.token);
-			// localStorage.setItem('user', token);
 			sessionStorage.setItem('jwt', token);
 			navigate('/auth/queries');
-			// setCookie('jwt', token);
-			// console.log(cookies.jwt);
-
 			if (!response.ok) {
 				setErrors({
 					email: responseData.message,
@@ -62,11 +58,8 @@ const Admin = () => {
 					responseData.error.status + ' ' + responseData.error.statusCode,
 				);
 			}
-
-			// console.log(errors);
 		} catch (err) {
 			console.log(err);
-			// console.log(responseData);
 		}
 	};
 	return (
@@ -107,6 +100,7 @@ const Admin = () => {
 								id='outlined-basic'
 								label='Password'
 								name='password'
+								type='password'
 								onChange={handleInputChange}
 								value={values.password}
 								variant='outlined'

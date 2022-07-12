@@ -18,14 +18,13 @@ const ContactUs = () => {
 		email: '',
 		query: '',
 	});
-	const [errors, setErrors] = useState({
-		name: '',
-		designation: '',
-		organization: '',
-		phoneno: '',
-		email: '',
-		query: '',
-	});
+	const [nameerror, setNameError] = useState('');
+	const [designationerror, setDesignationError] = useState('');
+	const [organizationerror, setOrganizationError] = useState('');
+	const [phonenoerror, setPhonenoError] = useState('');
+	const [emailerror, setEmailError] = useState('');
+	const [queryerror, setQueryError] = useState('');
+
 	const handleInputChange = (e) => {
 		setValues({
 			...values,
@@ -33,15 +32,13 @@ const ContactUs = () => {
 		});
 	};
 	const submitHandler = async (event) => {
+		setNameError('');
+		setDesignationError('');
+		setOrganizationError('');
+		setPhonenoError('');
+		setEmailError('');
+		setQueryError('');
 		event.preventDefault();
-		setErrors({
-			name: '',
-			designation: '',
-			organization: '',
-			phoneno: '',
-			email: '',
-			query: '',
-		});
 		try {
 			const response = await fetch('http://localhost:5000/api/v1/query/', {
 				method: 'POST',
@@ -60,25 +57,20 @@ const ContactUs = () => {
 			});
 
 			const responseData = await response.json();
-			console.log(responseData);
-			console.log(responseData.error.errors.name.message);
-			setErrors({
-				name: responseData.error.errors.name.message,
-				designation: responseData.error.errors.designation.message,
-				organization: responseData.error.errors.organization.message,
-				phoneno: responseData.error.errors.phoneno.message,
-				email: responseData.error.errors.email.message,
-				query: responseData.error.errors.query.message,
-			});
+			// console.log(responseData.error.errors);
+			setNameError(responseData.error.errors.name.message);
+			setDesignationError(responseData.error.errors.designation.message);
+			setOrganizationError(responseData.error.errors.organization.message);
+			if (typeof responseData.error.errors.phoneno !== 'undefined')
+				setPhonenoError(responseData.error.errors.phoneno.message);
+			if (typeof responseData.error.errors.email !== 'undefined')
+				setEmailError(responseData.error.errors.email.message);
+			if (typeof responseData.error.errors.query !== 'undefined')
+				setQueryError(responseData.error.errors.query.message);
+			if (response.ok) {
+				alert('Query submitted');
+			}
 			if (!response.ok) {
-				setErrors({
-					name: responseData.error.errors.name.message,
-					designation: responseData.error.errors.designation.message,
-					organization: responseData.error.errors.organization.message,
-					phoneno: responseData.error.errors.phoneno.message,
-					email: responseData.error.errors.email.message,
-					query: responseData.error.errors.query.message,
-				});
 				throw new Error(
 					responseData.error.status + ' ' + responseData.error.statusCode,
 				);
@@ -86,8 +78,8 @@ const ContactUs = () => {
 
 			// console.log(errors);
 		} catch (err) {
-			console.log(errors);
-			console.log(err);
+			// console.log(errors);
+			// console.log(err);
 			// console.log(responseData);
 		}
 	};
@@ -252,8 +244,8 @@ const ContactUs = () => {
 										onChange={handleInputChange}
 										value={values.name}
 										variant='outlined'
-										error={errors.name === '' ? false : true}
-										helperText={errors.name}
+										error={nameerror === '' ? false : true}
+										helperText={nameerror}
 									/>
 									<TextField
 										id='outlined-basic'
@@ -262,8 +254,8 @@ const ContactUs = () => {
 										onChange={handleInputChange}
 										value={values.designation}
 										variant='outlined'
-										error={errors.designation === '' ? false : true}
-										helperText={errors.designation}
+										error={designationerror === '' ? false : true}
+										helperText={designationerror}
 									/>
 									<TextField
 										id='outlined-basic'
@@ -272,8 +264,8 @@ const ContactUs = () => {
 										onChange={handleInputChange}
 										value={values.organization}
 										variant='outlined'
-										error={errors.organization === '' ? false : true}
-										helperText={errors.organization}
+										error={organizationerror === '' ? false : true}
+										helperText={organizationerror}
 									/>
 									<TextField
 										id='outlined-basic'
@@ -283,8 +275,8 @@ const ContactUs = () => {
 										value={values.phoneno}
 										variant='outlined'
 										inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-										error={errors.phoneno === '' ? false : true}
-										helperText={errors.phoneno}
+										error={phonenoerror === '' ? false : true}
+										helperText={phonenoerror}
 									/>
 
 									<TextField
@@ -294,8 +286,8 @@ const ContactUs = () => {
 										onChange={handleInputChange}
 										value={values.email}
 										variant='outlined'
-										error={errors.email === '' ? false : true}
-										helperText={errors.email}
+										error={emailerror === '' ? false : true}
+										helperText={emailerror}
 									/>
 									<div>
 										<TextareaAutosize
@@ -308,10 +300,10 @@ const ContactUs = () => {
 											style={{ height: '5vh', width: '97%' }}
 										/>
 										<p
-											class='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-1wc848c-MuiFormHelperText-root'
+											className='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-1wc848c-MuiFormHelperText-root'
 											id='outlined-basic-helper-text'
 										>
-											{errors.query}
+											{queryerror}
 										</p>
 									</div>
 								</Box>

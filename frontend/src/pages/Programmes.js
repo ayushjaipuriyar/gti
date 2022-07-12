@@ -1,19 +1,31 @@
-import { Card, Paper, Grid } from '@mui/material';
-import { Box } from '@mui/system';
+import { Card, Box, Grid, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import ImageComponent from '../components/ImageComponent';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 const Programmes = () => {
+	const [expanded, setExpanded] = useState(false);
+	var handleChange = function (panel) {
+		return function (event, isExpanded) {
+			console.log(panel, isExpanded);
+			setExpanded(isExpanded ? panel : false);
+		};
+	};
+
 	const [data, setData] = useState([]);
 	const [error, setError] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 
-	
 	useEffect(() => {
 		const sendRequest = async () => {
 			setIsLoading(true);
 			try {
 				const response = await fetch('http://localhost:5000/api/v1/news');
 				const responseData = await response.json();
+				console.log(response);
 				if (!response.ok) {
 					throw new Error(responseData);
 				}
@@ -28,19 +40,23 @@ const Programmes = () => {
 						images: responseData.data.data[id].images,
 					});
 				}
-				// console.log(loadedNews);
 				setData(loadedNews.reverse());
-				// console.log(data);
+				if (!response.ok) {
+					throw new Error(
+						responseData.error.status +
+							' ' +
+							responseData.error.statusCode +
+							' ' +
+							responseData.message,
+					);
+				}
 			} catch (error) {
-				// console.log(error.message);
-				// setError(error.message);
+				alert(error);
 			}
 			setIsLoading(false);
 		};
 		sendRequest();
 	}, [error]);
-	console.log('Here is loading', isLoading);
-	console.log('Here is data', data);
 	return (
 		<Box>
 			<Grid container justifyContent='center' alignItems='stretch'>
@@ -56,26 +72,41 @@ const Programmes = () => {
 						alt='spinner'
 					/>
 				)}
+
 				{data && (
 					<Grid item xs={12} sm={10} padding={1}>
-						{data.map(({ id, name, description, imageCover }) => (
-							<Card key={ id }>
-								<p>{name}</p>
-								<p>{description}</p>
-								{/* {fetchImage(imageCover)} */}
-								{/* <img src={fetchImage(imageCover)} alt='dd' /> */}
-								{/* {fetchImage(imageCover)} */}
-								{/* <p id={`img ${imageCover}`}></p>
-								<img
-									src={fetchImage(imageCover)}
-									alt='imagesCover'
-									height='100px'
-									width='100px'
-								/> */}
-								<p>
-									<ImageComponent id={imageCover} />
-								</p>
-							</Card>
+						{data.map(({ id, name, description, imageCover, images }, i) => (
+							<Accordion
+								expanded={expanded === `panel${id}`}
+								onChange={handleChange(`panel${id}`)}
+							>
+								<AccordionSummary
+									expandIcon={<ExpandMoreIcon />}
+									aria-controls='panel1bh-content'
+									id='panel1bh-header'
+								>
+									<Typography sx={{ width: '3%', flexShrink: 0 }}>
+										{i + 1}
+									</Typography>
+									<Typography sx={{ width: '30%', flexShrink: 0 }}>
+										{name}
+									</Typography>
+									<Typography sx={{ color: 'text.secondary', width: '33%' }}>
+										{description}
+									</Typography>
+									<ImageComponent id={id} url={imageCover} />
+									{/* <img src='https://picsum.photos/100/40' alt='ss' /> */}
+								</AccordionSummary>
+								<AccordionDetails>
+									<Typography>
+										Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
+										feugiat. Aliquam eget maximus est, id dignissim quam.
+										{images.map((url, index) => (
+											<ImageComponent id={`${id}${index}`} url={url} />
+										))}
+									</Typography>
+								</AccordionDetails>
+							</Accordion>
 						))}
 					</Grid>
 				)}

@@ -69,7 +69,7 @@ const Desc = () => {
 								<div className='descimg'>
 									<CardMedia
 										component='img'
-										image='https://gailebank.gail.co.in/gti/images/gti-noida-big.jpg'
+										image='/img/centers/Noida/gti-Noida-big.jpg'
 										className='descg'
 									/>
 								</div>
@@ -174,7 +174,7 @@ const Desc = () => {
 								<div className='descimg'>
 									<CardMedia
 										component='img'
-										image='https://gailebank.gail.co.in/gti/images/22-02-10-2.jpg'
+										image='/img/faculty.jpg'
 										className='descg'
 									/>
 								</div>
@@ -195,7 +195,7 @@ const Desc = () => {
 								<div className='descimg'>
 									<CardMedia
 										component='img'
-										image='https://gailebank.gail.co.in/gti/images/gti-noida-big.jpg'
+										image='/img/activities.jpg'
 										className='descg'
 									/>
 								</div>

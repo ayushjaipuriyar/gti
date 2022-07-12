@@ -35,7 +35,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/classroom-07-12-2010.jpg'
+								image='/img/centers/Jaipur/classroom.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
@@ -52,7 +52,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/computerlab_07-12-2010.jpg'
+								image='/img/centers/Jaipur/computerlab.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
@@ -67,7 +67,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/laboratory-07-12-2010.jpg'
+								image='/img/centers/Jaipur/laboratory.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
@@ -81,10 +81,7 @@ const Noida = () => {
 							</CardContent>
 						</Card>
 						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
-							<CardMedia
-								component='img'
-								image='https://gailebank.gail.co.in/gti/images/LIBRARY_GYMNASIUM_07-12-2010.jpg'
-							/>
+							<CardMedia component='img' image='/img/centers/Jaipur/gym.jpg' />
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
 									Library & Gymnasium
@@ -100,7 +97,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/conference-07-12-2010.jpg'
+								image='/img/centers/Jaipur/conferenceroom.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
@@ -116,7 +113,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#eeeeee' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/accommodation.jpg'
+								image='/img/centers/Jaipur/accommodation.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>

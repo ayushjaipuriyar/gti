@@ -35,7 +35,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/room1.jpg'
+								image='/img/centers/Noida/classroom.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
@@ -53,7 +53,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/computer-lab.jpg'
+								image='/img/centers/Noida/computerlab.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
@@ -68,7 +68,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/library.jpg'
+								image='/img/centers/Noida/library.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
@@ -86,10 +86,7 @@ const Noida = () => {
 							</CardContent>
 						</Card>
 						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
-							<CardMedia
-								component='img'
-								image='https://gailebank.gail.co.in/gti/images/gim.jpg'
-							/>
+							<CardMedia component='img' image='/img/centers/Noida/gym.jpg' />
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
 									Sports/Recreational Facilities
@@ -105,7 +102,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/conferenceroom.jpg'
+								image='/img/centers/Noida/conferenceroom.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
@@ -121,7 +118,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/auditorium-room.jpg'
+								image='/img/centers/Noida/auditorium.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
@@ -136,7 +133,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/accommodation.jpg'
+								image='/img/centers/Noida/accommodation.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>
@@ -153,7 +150,7 @@ const Noida = () => {
 						<Card sx={{ maxWidth: 345, background: '#f5f5f5' }}>
 							<CardMedia
 								component='img'
-								image='https://gailebank.gail.co.in/gti/images/cafeteria.jpg'
+								image='/img/centers/Noida/cafeteria.jpg'
 							/>
 							<CardContent>
 								<Typography gutterBottom variant='h5' component='div'>

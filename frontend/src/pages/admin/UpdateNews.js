@@ -2,11 +2,12 @@ import { TextField, Box, Grid, Typography, Paper, Button } from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const CreateNews = () => {
+const UpdateNews = () => {
+	const { state } = useLocation();
+	const { newsid } = state;
 	const navigate = useNavigate();
-
 	useEffect(() => {
 		if (
 			!sessionStorage.getItem('jwt') ||
@@ -16,6 +17,7 @@ const CreateNews = () => {
 			console.log('Not authenticated');
 		}
 	}, [navigate]);
+
 	const [values, setValues] = useState({
 		name: '',
 		description: '',
@@ -23,7 +25,49 @@ const CreateNews = () => {
 		images: [],
 	});
 	const [nameerror, setNameerror] = useState('');
-	const [id, setId] = useState('');
+
+	const [isLoading, setIsLoading] = useState(false);
+	useEffect(() => {
+		const sendRequest = async () => {
+			setIsLoading(true);
+			try {
+				const response = await fetch(
+					`http://localhost:5000/api/v1/news/${newsid}`,
+				);
+				const responseData = await response.json();
+				console.log(responseData.data.data);
+				setValues({
+					name: responseData.data.data.name,
+					description: responseData.data.data.description,
+					imageCover: responseData.data.data.imageCover,
+					images: responseData.data.data.images,
+				});
+				const divElement = document.getElementById('imageCover');
+				const image = new Image();
+				image.src = URL.createObjectURL(values.imageCover);
+				image.id = 'imageCover-img';
+				image.style.height = '200px';
+				divElement.appendChild(image);
+				const divElements = document.getElementById('imageCover');
+				for (let i = 0; i < values.images.length; i++) {
+					const image = new Image();
+					image.src = URL.createObjectURL(values.images[i]);
+					image.id = `images-${i}`;
+					image.style.height = '200px';
+					divElements.appendChild(image);
+				}
+				if (!response.ok) {
+					throw new Error(responseData);
+				}
+			} catch (error) {
+				console.log(error.message);
+				// setError(error.message);
+			}
+			setIsLoading(false);
+		};
+		sendRequest();
+	}, [newsid]);
+
 	const handleInputChange = (e) => {
 		setValues({
 			...values,
@@ -31,11 +75,11 @@ const CreateNews = () => {
 		});
 	};
 
-	const data = new FormData();
+	const updatedData = new FormData();
 
 	const handleInputChangeImage = (e) => {
 		const files = e.target.files;
-		data.append(e.target.name, files[0]);
+		updatedData.append(e.target.name, files[0]);
 		const imgElement = document.getElementById('imageCover-img');
 		if (imgElement) {
 			imgElement.remove();
@@ -44,8 +88,7 @@ const CreateNews = () => {
 		const image = new Image();
 		image.src = URL.createObjectURL(files[0]);
 		image.id = 'imageCover-img';
-		image.style.height = '200px';
-		// image.style.width = '100px';
+		image.style.maxHeight = '200px';
 		divElement.appendChild(image);
 	};
 
@@ -60,36 +103,37 @@ const CreateNews = () => {
 		}
 
 		for (let i = 0; i < files.length; i++) {
-			data.append(e.target.name, files[i]);
+			updatedData.append(e.target.name, files[i]);
 			const divElement = document.getElementById('images');
 			const image = new Image();
 			image.src = URL.createObjectURL(files[i]);
 			image.id = `images-${i}`;
-			image.style.height = '200px';
+			image.style.maxHeight = '200px';
 			divElement.appendChild(image);
 		}
 	};
 	const submitHandler = async (event) => {
 		event.preventDefault();
 		setNameerror('');
-
+		updatedData.append('name', values.name);
+		updatedData.append('description', values.description);
 		try {
-			const response = await fetch('http://localhost:5000/api/v1/news/', {
-				method: 'POST',
-				credentials: 'include',
-				headers: {
-					'Content-Type': 'application/json; charset=utf-8',
-					Authorization: ('Bearer ', sessionStorage.getItem('jwt')),
+			const response = await fetch(
+				`http://localhost:5000/api/v1/news/${newsid}`,
+				{
+					method: 'PATCH',
+					credentials: 'include',
+					headers: {
+						// 'Content-Type': 'application/json; charset=utf-8',
+						Authorization: ('Bearer ', sessionStorage.getItem('jwt')),
+					},
+					body: updatedData,
 				},
-				body: JSON.stringify({
-					name: values.name,
-					description: values.description,
-					imageCover: 'default.png',
-				}),
-			});
+			);
 
 			const responseData = await response.json();
 			console.log(responseData);
+			// submitHandlerImage();
 			if (!response.ok) {
 				setNameerror(responseData.error.errors.name.message);
 				throw new Error(
@@ -99,44 +143,12 @@ const CreateNews = () => {
 						' ' +
 						responseData.message,
 				);
-			} else {
-				setId(responseData.data.data.id);
-				submitHandlerImage();
 			}
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 
-	const submitHandlerImage = async () => {
-		setNameerror('');
-
-		try {
-			const response = await fetch(`http://localhost:5000/api/v1/news/${id}`, {
-				method: 'PATCH',
-				credentials: 'include',
-				headers: {
-					// 'Content-Type': 'application/json; charset=utf-8',
-					Authorization: ('Bearer ', sessionStorage.getItem('jwt')),
-				},
-				body: data,
-			});
-
-			const responseData = await response.json();
-			if (!response.ok) {
-				throw new Error(
-					responseData.error.status +
-						' ' +
-						responseData.error.statusCode +
-						' ' +
-						responseData.message,
-				);
-			}
-		} catch (err) {
-			console.log(err);
-			// console.log(responseData);
-		}
-	};
 	return (
 		<Box>
 			<Grid container justifyContent='center' alignItems='stretch'>
@@ -150,6 +162,13 @@ const CreateNews = () => {
 				<Grid item xs={12} sm={10} padding={1}>
 					<Box sx={{ marginLeft: 2, marginTop: 5 }}>
 						<Paper sx={{ padding: 3 }}>
+							{isLoading && (
+								<img
+									src='https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'
+									alt='spinner'
+								/>
+							)}
+
 							<Typography variant='h5' component='h2'>
 								News Creation
 							</Typography>
@@ -217,14 +236,14 @@ const CreateNews = () => {
 											type='file'
 											accept='image/*'
 											hidden
-											max='3'
 											multiple
+											max='3'
 											name='images'
 											onChange={handleInputChangeImages}
 										/>
 									</Button>
 									<p
-										className='images MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-1wc848c-MuiFormHelperText-root'
+										className='imageCover MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained css-1wc848c-MuiFormHelperText-root'
 										id='outlined-basic-helper-text'
 									></p>
 								</div>
@@ -232,7 +251,7 @@ const CreateNews = () => {
 							<Button
 								variant='outlined'
 								onClick={submitHandler}
-								style={{ marginLeft: '20vw' }}
+								style={{ marginLeft: '47%' }}
 							>
 								Submit
 							</Button>
@@ -250,4 +269,4 @@ const CreateNews = () => {
 	);
 };
 
-export default CreateNews;
+export default UpdateNews;
