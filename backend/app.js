@@ -11,6 +11,7 @@ const cors = require('cors');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const newsRouter = require('./routes/newsRoutes');
+const galleryRouter = require('./routes/galleryRoutes');
 const queryRouter = require('./routes/queriesRoutes');
 const userRouter = require('./routes/userRoutes');
 const crossOriginResourcePolicy = require('cross-origin-resource-policy');
@@ -35,8 +36,12 @@ const limiter = rateLimit({
 	windowMs: 60 * 60 * 1000,
 	message: 'Too many requests from this IP, please try again in an hour!',
 });
+const queryLimiter = rateLimit({
+	max: 5,
+	windowMs: 60 * 60 * 1000,
+	message: 'Too many requests from this IP, please try again in an hour!',
+});
 app.use('/api', limiter);
-
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
@@ -62,6 +67,7 @@ app.use((req, res, next) => {
 app.use('/api/v1/news', newsRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/query', queryRouter);
+app.use('/api/v1/gallery', galleryRouter);
 app.all('*', (req, res, next) => {
 	next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
