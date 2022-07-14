@@ -78,6 +78,7 @@ const UpdateNews = () => {
 	const updatedData = new FormData();
 
 	const handleInputChangeImage = (e) => {
+		updatedData.delete(e.target.name);
 		const files = e.target.files;
 		updatedData.append(e.target.name, files[0]);
 		const imgElement = document.getElementById('imageCover-img');
@@ -93,6 +94,7 @@ const UpdateNews = () => {
 	};
 
 	const handleInputChangeImages = (e) => {
+		updatedData.delete(e.target.name);
 		const files = e.target.files;
 		const prevImages = document.querySelectorAll('[id^="images-"]');
 		if (prevImages.length !== 0) {
@@ -115,6 +117,8 @@ const UpdateNews = () => {
 	const submitHandler = async (event) => {
 		event.preventDefault();
 		setNameerror('');
+		updatedData.delete('name');
+		updatedData.delete('description');
 		updatedData.append('name', values.name);
 		updatedData.append('description', values.description);
 		try {

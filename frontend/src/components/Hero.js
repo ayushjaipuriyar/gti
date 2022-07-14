@@ -20,6 +20,9 @@ const Desc = () => {
 	const centers = ['Noida', 'Jaipur'];
 	return (
 		<>
+			<div className="heropic">
+
+			</div>
 			<Grid container justifyContent='center' alignItems='stretch'>
 				<Grid
 					item

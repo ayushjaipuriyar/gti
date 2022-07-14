@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 
 const ImageComponent = (props) => {
@@ -19,8 +20,12 @@ const ImageComponent = (props) => {
 				// console.log(URL.createObjectURL(blob));
 				const image = new Image();
 				image.src = URL.createObjectURL(blob);
-				image.style.width = '100px';
-				image.style.heigh = '100px';
+				if (props.inner) {
+					image.style.width = '20vw';
+				} else {
+					image.style.width = '100px';
+					image.style.heigh = '100px';
+				}
 				// console.log(image);
 				// return image;
 				document.getElementById(`img ${props.id}`).appendChild(image);
@@ -42,7 +47,11 @@ const ImageComponent = (props) => {
 					alt='spinner'
 				/>
 			)}
-			<p id={`img ${props.id}`}></p>
+			<Box
+				component='div'
+				sx={{ display: 'inline' }}
+				id={`img ${props.id}`}
+			></Box>
 			{/* {fetchImage($props.id)} */}
 		</>
 	);

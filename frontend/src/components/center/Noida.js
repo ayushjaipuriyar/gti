@@ -24,7 +24,7 @@ const Noida = () => {
 					</Typography>
 					<Box
 						sx={{
-							p: 2,
+							p: 4,
 							bgcolor: 'background.default',
 							display: 'grid',
 							gridTemplateColumns: { md: '1fr 1fr' },

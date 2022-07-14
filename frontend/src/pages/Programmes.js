@@ -88,23 +88,25 @@ const Programmes = () => {
 									<Typography sx={{ width: '3%', flexShrink: 0 }}>
 										{i + 1}
 									</Typography>
-									<Typography sx={{ width: '30%', flexShrink: 0 }}>
+									<Typography sx={{ width: '80%', flexShrink: 0 }}>
 										{name}
-									</Typography>
-									<Typography sx={{ color: 'text.secondary', width: '33%' }}>
-										{description}
 									</Typography>
 									<ImageComponent id={id} url={imageCover} />
 									{/* <img src='https://picsum.photos/100/40' alt='ss' /> */}
 								</AccordionSummary>
 								<AccordionDetails>
-									<Typography>
-										Nulla facilisi. Phasellus sollicitudin nulla et quam mattis
-										feugiat. Aliquam eget maximus est, id dignissim quam.
+									<Typography>{description}</Typography>
+									<br></br>
+									<br></br>
+									<box component='div' sx={{ display: 'inline' }}>
 										{images.map((url, index) => (
-											<ImageComponent id={`${id}${index}`} url={url} />
+											<ImageComponent
+												id={`${id}${index}`}
+												url={url}
+												inner='1'
+											/>
 										))}
-									</Typography>
+									</box>
 								</AccordionDetails>
 							</Accordion>
 						))}
