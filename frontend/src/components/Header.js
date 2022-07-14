@@ -24,7 +24,7 @@ const Header = () => {
 	const isMatch = useMediaQuery(theme.breakpoints.down('md'));
 	return (
 		<React.Fragment>
-			<AppBar sx={{ background: '#93C3CE' }}>
+			<AppBar sx={{ background: '#5FD6A2' }}>
 				<Toolbar>
 					<img src='/logo.png' height='50px' alt='logo' />
 					{isMatch ? (
@@ -35,14 +35,14 @@ const Header = () => {
 						<>
 							<Tabs
 								sx={{ marginLeft: 'auto' }}
-								indicatorColor='secondary'
+								indicatorColor='##5FD6A2'
 								value={value}
 								onChange={(e, value) => setValue(value)}
 							>
 								{auth
 									? pages.map((pages, index) => (
 											<Link
-												style={{ color: 'inherit', textDecoration: 'none' }}
+												style={{ color: '#fff', textDecoration: 'none' }}
 												to={`/auth/${pages}`}
 												key={pages}
 											>
@@ -51,7 +51,7 @@ const Header = () => {
 									  ))
 									: pages.map((pages, index) => (
 											<Link
-												style={{ color: 'inherit', textDecoration: 'none' }}
+												style={{ color: '#000', textDecoration: 'none' }}
 												to={`/${pages}`}
 												key={pages}
 											>
