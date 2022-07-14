@@ -65,3 +65,12 @@
 	left: 100px;
 	top: 100px;
 }
+
+.heropic {
+	display: block;
+	background: url(https://picsum.photos/g/1921/1081?random) top center;
+	background-size: cover;
+	transform: translateZ(-1px) scale(2.1);
+	min-height: 100%;
+	z-index: -2;
+}
